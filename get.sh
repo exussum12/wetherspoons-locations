@@ -4,4 +4,4 @@ curl 'https://www.jdwetherspoon.com/api/advancedsearch' -H 'User-Agent: Mozilla/
 
 jq -r '.regions [].subRegions [].items [] | del(.facilities) | keys |  @csv'  spoons.json | uniq >  spoons.csv
 
-jq -r '.regions [].subRegions [].items| del(.[].facilities) | (map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $rows[] | @csv' spoons.json >> spoons.csv
+jq -r '.regions [].subRegions [].items| del(.[].facilities) | (map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $rows[] | @csv' spoons.json | sort >> spoons.csv
